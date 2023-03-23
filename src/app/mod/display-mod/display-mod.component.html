@@ -1,0 +1,38 @@
+<mat-card class="mod-card">
+  <mat-grid-list cols="2" rowHeight="300px">
+      <mat-grid-tile>
+        <img mat-card-image src="{{data.wikiaThumbnail}}" alt="Mod">
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <table>
+          <tbody>
+            <tr>
+              <td>{{data.name}}</td>
+            </tr>
+            <tr>
+              <td>{{data.type}}</td>
+
+            </tr>
+            <tr>
+              <td>{{data.compatName}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-grid-tile>
+  </mat-grid-list>
+  <mat-card-content>
+    <mat-grid-list cols="2" rowHeight="20px">
+      <div *ngFor="let drop of data.drops">
+        <mat-grid-tile>
+          {{drop.location}}
+        </mat-grid-tile>
+        <mat-grid-tile>
+          {{drop.chance}}
+        </mat-grid-tile>
+      </div>
+
+    </mat-grid-list>
+
+  </mat-card-content>
+
+</mat-card>

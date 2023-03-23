@@ -1,0 +1,40 @@
+<mat-grid-list cols="1" rowHeight="100px">
+  <mat-grid-tile>
+    <form class="mat-mdc-form-field">
+      <mat-form-field class="mat-mdc-form-field" appearance="fill">
+        <mat-label>Warframe</mat-label>
+        <input type="text"
+               placeholder="Pick one"
+               aria-label="Number"
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"(optionSelected)="onOptionSelected($event)" >
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
+            {{option.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+
+  </mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list cols="2" rowHeight="700px">
+  <mat-grid-tile style="overflow: auto">
+    <div class="container" cdkDropList #modList="cdkDropList" [cdkDropListData]="mods" [cdkDropListConnectedTo]="[modWarframeList]" (cdkDropListDropped)="drop($event)" >
+      <div class="rectangle" *ngFor=" let mod of mods" cdkDrag>
+        <img src="{{mod.wikiaThumbnail}}" alt="">
+      </div>
+  </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile style="overflow: auto">
+    {{limitMod}}
+    <div class="container" cdkDropList #modWarframeList="cdkDropList" [cdkDropListData]="modWarframe" [cdkDropListConnectedTo]="[modList]"  (cdkDropListDropped)="drop($event)"  >
+      <div class="rectangle" *ngFor=" let mod of modWarframe" cdkDrag>
+        <img src="{{mod.wikiaThumbnail}}" alt="">
+      </div>
+  </div>
+  </mat-grid-tile>
+</mat-grid-list>
